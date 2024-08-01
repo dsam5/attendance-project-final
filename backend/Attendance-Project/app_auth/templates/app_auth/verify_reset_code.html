@@ -1,0 +1,9 @@
+<form method="post" action="{% url 'verify_reset_code' %}">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <input type="text" name="reset_code" placeholder="Enter reset code" required>
+    <button type="submit">Verify Reset Code</button>
+</form>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}

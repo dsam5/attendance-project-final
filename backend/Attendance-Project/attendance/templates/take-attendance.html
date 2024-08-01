@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Capture</title>
+  <style>
+    #video {
+      width: 100%;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Face Capture</h1>
+  <video id="video" autoplay></video>
+  <button id="captureButton">Capture Face</button>
+  <p id="message"></p>
+
+  
+  <!-- Add an invisible form to submit the image data -->
+  <form id="imageForm" method="post" style="display: none;">
+    
+    <!-- Add an input element to store image data temporarily -->
+    <input type="hidden" id="imageData" name="imageData">
+    
+    <input type="hidden" name="imageData" id="imageDataField">
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('video');
+  const captureButton = document.getElementById('captureButton');
+  const message = document.getElementById('message');
+
+  // Check if getUserMedia is supported
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Request access to the camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        // Display the video stream in the video element
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(err => {
+        console.error('Error accessing the camera: ', err);
+      });
+
+    // Capture face button click event
+    captureButton.addEventListener('click', () => {
+      // Capture the current frame of the video
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Convert the canvas content to base64 data URL
+      const imageDataURL = canvas.toDataURL('image/png');
+
+      // Save the image data to the input element
+      document.getElementById('imageData').value = imageDataURL;
+
+      // Submit the form with the image data using AJAX
+      const formData = new FormData(document.getElementById('imageForm'));
+      fetch('/attendance/process/', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(data => {
+        // Output a message based on the response from Django
+        message.textContent = data;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  } else {
+    console.error('getUserMedia is not supported on your browser');
+  }
+});
+
+  </script>
+</body>
+</html>

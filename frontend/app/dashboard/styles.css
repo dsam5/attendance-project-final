@@ -1,0 +1,54 @@
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.Grid {
+  margin-top: 20px;
+}
+
+.Card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Card h2 {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.Card p {
+  margin-bottom: 20px;
+}
+
+.Link {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.Link:hover {
+  color: #23527c;
+}

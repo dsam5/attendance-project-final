@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capture Face</title>
+</head>
+<body>
+    <h2>Capture Face</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label for="face_image">Face Image:</label>
+        <input type="file" id="face_image" name="face_image"><br>
+        <button type="submit">Capture</button>
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+    </form>
+</body>
+</html>

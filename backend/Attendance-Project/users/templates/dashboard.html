@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Dashboard</h2>
+    <p>Welcome, {{ user.username }}!</p>
+
+    <a href="take-attendance.html">Take attendance</a>
+    <p>----------------------</p>
+    <a href="#">Go to Records</a>
+    <a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

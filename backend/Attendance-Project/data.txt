@@ -1,0 +1,7 @@
+{
+    "date":"/attended/not-attended",
+    "date":"/attended/not-attended"
+}
+
+// 
+2. An endpoint that returns list of all students in the same year as the course. it makes a list of all students who can write exams and those who cannot write (this decision is made if the student has missed at least 3 sessions)

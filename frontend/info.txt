@@ -1,0 +1,130 @@
+import React, { useState, useEffect } from 'react';
+import { Grid, TextField, Button, Card, CardContent, CardActions, Typography, Link, AppBar, Toolbar, IconButton, Container, Menu, MenuItem, Avatar } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useRouter } from 'next/navigation';
+import axios from 'axios'; // Import axios for making API requests
+
+const username = "Admin";
+
+export default function DashboardPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [courses, setCourses] = useState([]); // State to hold courses data
+  const router = useRouter();
+
+  // Fetch courses data from the API
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('https://your-api-endpoint.com/courses');
+        setCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+
+    fetchCourses();
+  }, []); // Empty dependency array to run the effect only once on mount
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigation = (path: string) => {
+    handleMenuClose();
+    router.push(path);
+  };
+
+  return (
+    <div className="container">
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenuClick}>
+            <MenuIcon />
+          </IconButton>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <MenuItem onClick={() => handleNavigation('/dashboard')}>Home</MenuItem>
+            <MenuItem onClick={() => handleNavigation('/viewByCourse')}>Courses</MenuItem>
+            <MenuItem onClick={() => handleNavigation('/viewByWeek')}>Class</MenuItem>
+            <MenuItem onClick={() => handleNavigation('/login')}>Logout</MenuItem>
+          </Menu>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Attendance System
+          </Typography>
+          <Avatar style={{ marginRight: '1rem' }}>{username.charAt(0)}</Avatar>
+          <Typography variant="h6" style={{ marginRight: '1rem' }}>
+            {username}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="lg" style={{ marginTop: '2rem' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              fullWidth
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search courses"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={3}>
+              {courses.filter(course => course.course_name.toLowerCase().includes(searchQuery.toLowerCase())).map((course) => (
+                <Grid item key={course.course_id} xs={12} sm={6} md={4} lg={3}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        {course.course_name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Level/Year: {course.course_year}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Class: {course.class}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" onClick={() => router.push('/takeAttendance')}>Take Attendance</Button><br />
+                      <Button size="small" onClick={() => router.push('/viewByCourse')}>View by Course</Button><br />
+                      <Button size="small" onClick={() => router.push('/viewByWeek')}>View by Week</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
+  );
+}
+
+
+[
+	{
+		"course_id": "CSM151",
+		"course_name": "Information Technology I",
+		"course_year": 1
+	},
+	{
+		"course_id": "CSM254",
+		"course_name": "Programming in Assembly",
+		"course_year": 2
+	},
+	{
+		"course_id": "CSM354",
+		"course_name": "Computer Graphics",
+		"course_year": 3
+	}
+]
+
+/takeAttendance?course_id=${course.course_id}
