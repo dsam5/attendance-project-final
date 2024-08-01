@@ -20,7 +20,7 @@ const StyledContainer = styled(Box)(({ theme }) => ({
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: '2rem',
   borderRadius: '10px',
-  boxShadow: theme.shadows[3], // Adjust shadow index as per your theme's setup
+  boxShadow: theme.shadows[3], 
   backgroundColor: '#fff',
   maxWidth: '600px',
   width: '100%',
@@ -32,10 +32,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   textTransform: 'none',
   fontSize: '1rem',
   fontWeight: 'bold',
-  boxShadow: theme.shadows[3], // Adjust shadow index as per your theme's setup
+  boxShadow: theme.shadows[3], 
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
-    boxShadow: theme.shadows[5], // Adjust shadow index as per your theme's setup
+    boxShadow: theme.shadows[5], 
     transform: 'translateY(-2px)',
   },
 }));
@@ -45,7 +45,7 @@ export default function InspectRecordsPage() {
   const course = searchParams.get('course');
 
   return (
-    <ThemeProvider theme={theme}> {/* Ensure ThemeProvider is wrapping your component */}
+    <ThemeProvider theme={theme}> {}
       <StyledContainer>
         <StyledPaper elevation={3}>
           <Typography variant="h4" component="h1" sx={{ marginBottom: '2rem', textAlign: 'center', fontWeight: 'bold' }}>

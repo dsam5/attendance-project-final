@@ -152,7 +152,7 @@ export default function TakeAttendance() {
           .content {
             display: flex;
             justify-content: space-around;
-            align-items: flex-start; /* Align items to the top */
+            align-items: flex-start;
             width: 100%;
             max-width: 1200px;
           }
@@ -166,7 +166,7 @@ export default function TakeAttendance() {
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            margin-left: 2rem; /* Adjust margin as needed */
+            margin-left: 2rem; 
           }
           table {
             width: 100%;

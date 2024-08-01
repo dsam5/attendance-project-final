@@ -81,8 +81,8 @@ export default function Home() {
 
         .rectangle {
           display: flex;
-          width: 80vw; /* Adjust width as needed */
-          height: 40vw; /* Same as width for a square */
+          width: 80vw; 
+          height: 40vw; 
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           border-radius: 8px;
@@ -92,16 +92,16 @@ export default function Home() {
 
         .image {
           position: absolute;
-          top: 10%; /* Adjust top positioning as needed */
-          left: 10%; /* Adjust left positioning as needed */
-          width: 80px; /* Adjust size as needed */
-          height: 100px; /* Adjust size as needed */
+          top: 10%; 
+          left: 10%; 
+          width: 80px; 
+          height: 100px; 
         }
 
         .left-side {
           flex: 1;
           background-color: lightblue;
-          position: relative; /* Ensure the image can be positioned inside */
+          position: relative; 
           display: flex;
           justify-content: center;
           align-items: center;
@@ -110,10 +110,10 @@ export default function Home() {
 
         .knust-image {
           position: absolute;
-          top: 10%; /* Adjust top positioning as needed */
-          left: 10%; /* Adjust left positioning as needed */
-          width: 80px; /* Adjust size as needed */
-          height: 100px; /* Adjust size as needed */
+          top: 10%; 
+          left: 10%; 
+          width: 80px; 
+          height: 100px;
           animation: fadeIn 1.5s ease-in-out;
         }
 
@@ -181,8 +181,8 @@ export default function Home() {
 
         @media (max-width: 768px) {
           .rectangle {
-            width: 80vw; /* Adjust width for smaller screens */
-            height: 80vw; /* Maintain square shape */
+            width: 80vw; 
+            height: 80vw;
             flex-direction: column;
           }
 
